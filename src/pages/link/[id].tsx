@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import prisma from "@/lib/prisma";
 
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 import React, { ReactElement, useState } from "react";
 
@@ -22,12 +22,7 @@ import {
 
 import { createStyles } from "@mantine/core";
 
-import {
-  IconTrash,
-  IconEye,
-  IconArrowBack,
-  IconArrowLeft,
-} from "@tabler/icons";
+import { IconTrash, IconEye, IconArrowLeft } from "@tabler/icons";
 
 import { DateTime } from "luxon";
 
@@ -89,12 +84,32 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Link = ({ data }) => {
-  const [formattedData, setFormattedData] = useState(JSON.parse(data));
+interface Click {
+  createdAt: string;
+  id: string;
+  trackId: string;
+  updatedAt: string;
+  url: string;
+  clicks: {
+    createdAt: string;
+    id: string;
+    ip: string;
+    trackId: string;
+    updatedAt: string;
+    userAgent: string;
+  }[];
+}
+
+const Link = ({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [formattedData, setFormattedData] = useState<Click>(JSON.parse(data));
 
   const { classes, cx } = useStyles();
 
   const [selection, setSelection] = useState<string[]>([]);
+
+  console.log(formattedData);
 
   if (formattedData.clicks === undefined || formattedData.clicks.length === 0) {
     return (
@@ -129,10 +144,10 @@ const Link = ({ data }) => {
     );
   const toggleAll = () =>
     setSelection((current) =>
-      current.length === formattedData.length ||
-      (current.length < formattedData.length && current.length !== 0)
+      current.length === formattedData.clicks.length ||
+      (current.length < formattedData.clicks.length && current.length !== 0)
         ? []
-        : formattedData.map((item) => item.trackId)
+        : formattedData.clicks.map((item) => item.trackId)
     );
 
   const rows = formattedData.clicks.map((link) => {
@@ -200,10 +215,10 @@ const Link = ({ data }) => {
                 <th className={cx(classes.tableLeftHead)}>
                   <Checkbox
                     // checked={selection.includes(item.id)}
-                    checked={selection.length === formattedData.length}
+                    checked={selection.length === formattedData.clicks.length}
                     indeterminate={
                       selection.length > 0 &&
-                      selection.length !== formattedData.length
+                      selection.length !== formattedData.clicks.length
                     }
                     onChange={toggleAll}
                     transitionDuration={200}

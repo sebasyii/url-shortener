@@ -1,7 +1,6 @@
 import { LinkData } from "@/types/typings";
 import {
   ActionIcon,
-  Button,
   Center,
   Checkbox,
   Paper,

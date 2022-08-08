@@ -1,19 +1,15 @@
 import {
-  Burger,
   Container,
   Group,
   Header,
-  Paper,
-  Transition,
   createStyles,
-  Title,
   Text,
   Button,
   useMantineTheme,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 
 const HEADER_HEIGHT = 60;
 
@@ -38,8 +34,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Navbar = () => {
-  const { classes, cx } = useStyles();
-  const theme = useMantineTheme();
+  const { classes } = useStyles();
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>

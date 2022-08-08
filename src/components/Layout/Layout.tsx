@@ -1,5 +1,5 @@
 import { Container, createStyles } from "@mantine/core";
-import React from "react";
+import React, { ReactNode } from "react";
 import Navbar from "../Navbar";
 
 const useStyles = createStyles((theme) => ({
@@ -8,11 +8,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   const { classes } = useStyles();
   return (
     <>
-      <Navbar links={[{ link: "/hello", label: "Hello" }]} />
+      <Navbar />
       <main className={classes.root}>
         <Container size="md">{children}</Container>
       </main>

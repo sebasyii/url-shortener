@@ -2,18 +2,8 @@ import Layout from "@/components/Layout";
 import LinksModal from "@/components/LinksModal";
 import LinksTable from "@/components/LinksTable";
 import { LinkData } from "@/types/typings";
-import {
-  Button,
-  Center,
-  Container,
-  createStyles,
-  Group,
-  Paper,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import { Prisma } from "@prisma/client";
+import { Button, Group, Stack, Title } from "@mantine/core";
+
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
