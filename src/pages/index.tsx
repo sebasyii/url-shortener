@@ -35,7 +35,7 @@ const Home = () => {
           <LinksModal opened={opened} setOpened={setOpened} />
         </Group>
 
-        <LinksTable data={data} isLoading={isLoading} error={error} />
+        {/* <LinksTable data={data} isLoading={isLoading} error={error} /> */}
       </Stack>
     </>
   );
