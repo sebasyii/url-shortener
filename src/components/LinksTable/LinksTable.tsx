@@ -62,6 +62,14 @@ const LinksTable = ({ data, isLoading, error }: LinksTableProps) => {
     );
   }
 
+  if (isLoading) {
+    return (
+      <>
+        <Title order={3}>It is loading</Title>
+      </>
+    );
+  }
+
   if (error) {
     return (
       <>
