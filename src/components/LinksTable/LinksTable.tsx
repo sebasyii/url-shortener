@@ -144,7 +144,11 @@ const LinksTable = ({ data, isLoading, error }: LinksTableProps) => {
               </ActionIcon>
 
               <CopyButton
-                value={`${window.location.hostname}:3000/${link.trackId}`}
+                value={`${
+                  process.env.NODE_ENV === "production"
+                    ? window.location.hostname + "/" + link.trackId
+                    : window.location.hostname + ":3000/" + link.trackId
+                }`}
                 timeout={2000}
               >
                 {({ copied, copy }) => (
