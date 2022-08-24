@@ -11,7 +11,7 @@ const UserLink = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
 
-  const ip = req.socket.remoteAddress as string;
+  const ip = req.headers["x-real-ip"] || req.socket.remoteAddress;
   const userAgent = req.headers["user-agent"] as string;
 
   const existingData = await prisma.track.findUnique({
